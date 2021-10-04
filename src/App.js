@@ -10,6 +10,7 @@ import { Route, Switch } from "react-router-dom";
 import Navbar from "./Components/Navbar";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import booked from "./pages/booked";
 function App() {
   return (
     <>
@@ -19,6 +20,7 @@ function App() {
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
         <Route exact path="/rooms" component={Rooms} />
+        <Route exact path="/booked" component={booked} />
         <Route eaxct path="/rooms/:slug" component={SingleRoom} />
         <Route component={Error} />
       </Switch>

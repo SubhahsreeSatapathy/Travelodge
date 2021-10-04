@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import validation from "./validation";
 
-const Login = ({ submitForm }) => {
+const SignupForm = ({ submitForm }) => {
   const [values, setValues] = useState({
+    fullname: "",
     email: "",
     password: "",
+    confirm: "",
   });
   const [errors, setErrors] = useState({});
   const [dataIsCorrect, setDataIsCorrect] = useState(false);
@@ -29,9 +31,20 @@ const Login = ({ submitForm }) => {
       <div className="container">
         <div className="app-wrapper">
           <div>
-            <h2 className="title">Sign In</h2>
+            <h2 className="title">Create Account</h2>
           </div>
           <form className="form-wrraper">
+            <div className="name">
+              <label className="label">Full Name</label>
+              <input
+                type="text"
+                className="input"
+                name="fullname"
+                value={values.fullname}
+                onChange={handleChange}
+              />{" "}
+              {errors.fullname && <p className="error">{errors.fullname}</p>}
+            </div>
             <div className="email">
               <label className="label">Email ID</label>
               <input
@@ -54,10 +67,20 @@ const Login = ({ submitForm }) => {
               />
               {errors.password && <p className="error">{errors.password}</p>}
             </div>
-
+            <div className="password">
+              <label className="label">Confirm Password </label>
+              <input
+                type="password"
+                className="input"
+                name="confirm"
+                value={values.confirm}
+                onChange={handleChange}
+              />
+              {errors.confirm && <p className="error">{errors.confirm}</p>}
+            </div>
             <div>
               <button className="submit" onClick={handleFormSubmit}>
-                Sign In
+                Sign Up
               </button>
             </div>
           </form>
@@ -67,4 +90,4 @@ const Login = ({ submitForm }) => {
   );
 };
 
-export default Login;
+export default SignupForm;

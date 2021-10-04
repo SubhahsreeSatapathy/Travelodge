@@ -118,7 +118,7 @@ export default function RoomFilter({ rooms }) {
               name="breakfast"
               id="breakfast"
               checked={breakfast}
-              onchange={handleChange}
+              onChange={handleChange}
             />
             <label htmlFor="breakfast">breakfast</label>
           </div>
@@ -128,7 +128,7 @@ export default function RoomFilter({ rooms }) {
               name="pets"
               id="pets"
               checked={pets}
-              onchange={handleChange}
+              onChange={handleChange}
             />
             <label htmlFor="pets">pets</label>
           </div>
