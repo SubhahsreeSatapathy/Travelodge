@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { login } from "../apis/userApi";
 import validation from "./validation";
 
 const Login = ({ submitForm }) => {
   const [values, setValues] = useState({
-    email: "",
+    emailId: "",
     password: "",
   });
   const [errors, setErrors] = useState({});
@@ -14,10 +15,23 @@ const Login = ({ submitForm }) => {
       [event.target.name]: event.target.value,
     });
   };
-  const handleFormSubmit = (event) => {
+  const handleFormSubmit = async (event) => {
     event.preventDefault();
     setErrors(validation(values));
     setDataIsCorrect(true);
+    login(values)
+      .then((res) => {
+        if (res.data.result === null) {
+          alert("No user found");
+        } else {
+          alert("Logged In successfully!");
+          localStorage.setItem("isLoggedIn", "true");
+          window.location.href = "/rooms";
+        }
+      })
+      .catch((err) => {
+        console.log("Error while loggin");
+      });
   };
   useEffect(() => {
     if (Object.keys(errors).length === 0 && dataIsCorrect) {
@@ -37,11 +51,12 @@ const Login = ({ submitForm }) => {
               <input
                 type="text"
                 className="input"
-                name="email"
-                value={values.email}
+                name="emailId"
+                value={values.emailId}
                 onChange={handleChange}
               />
-              {errors.email && <p className="error">{errors.email}</p>}
+              {/* {errors.email && <p className="error">{errors.email}</p>}
+               */}
             </div>
             <div className="password">
               <label className="label">Password</label>

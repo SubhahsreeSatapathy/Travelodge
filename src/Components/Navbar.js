@@ -10,6 +10,16 @@ export default class Navbar extends Component {
   handleToggle = () => {
     this.setState({ isOpen: !this.state.isOpen });
   };
+  handleLogout = () => {
+    let x = window.confirm("Do You Want to Log Out ?");
+    if (x) {
+      localStorage.removeItem("isLoggedIn");
+      alert("Logged out Successfully");
+      window.location.href = "/login";
+    } else {
+      window.location.href = "/";
+    }
+  };
   render() {
     return (
       <nav className="navbar">
@@ -47,6 +57,11 @@ export default class Navbar extends Component {
             </li>
             <li>
               <Link to="/register">Register</Link>
+            </li>
+            <li>
+              <button className="logout" onClick={this.handleLogout}>
+                Logout
+              </button>
             </li>
           </ul>
         </div>

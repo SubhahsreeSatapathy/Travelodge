@@ -592,3 +592,14 @@ button:active {
   font-size: 40px;
 }
 /* register cs ends*/
+
+.logout {
+  font-size: 1.1rem;
+  color: white;
+  outline: none;
+  border: 1px solid black;
+  padding: 7.5px 20px;
+  background: rgb(216, 77, 77);
+  border-radius: 4px;
+  cursor: pointer;
+}

@@ -15,9 +15,7 @@ const validation = (values) => {
   } else if (values.password.length < 6) {
     errors.password = "Password must be more than 6 characters";
   }
-  if (values.password != values.confirm) {
-    errors.confirm = "Password must be same";
-  }
+
   return errors;
 };
 

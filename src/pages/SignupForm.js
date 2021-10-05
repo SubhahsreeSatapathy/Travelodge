@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
+import { register } from "../apis/userApi";
 import validation from "./validation";
 
 const SignupForm = ({ submitForm }) => {
   const [values, setValues] = useState({
-    fullname: "",
-    email: "",
+    fullName: "",
+    emailId: "",
     password: "",
-    confirm: "",
+    phoneNumber: "",
   });
   const [errors, setErrors] = useState({});
   const [dataIsCorrect, setDataIsCorrect] = useState(false);
@@ -20,6 +21,20 @@ const SignupForm = ({ submitForm }) => {
     event.preventDefault();
     setErrors(validation(values));
     setDataIsCorrect(true);
+    register(values)
+      .then((res) => {
+        console.log(res);
+        if (res.data === "Saved Successfully") {
+          alert("Registered Successfully!");
+          window.location.href = "/login";
+        } else {
+          alert("User Already Exsits");
+        }
+      })
+      .catch((err) => {
+        alert("Error while Register");
+        window.location.href = "/";
+      });
   };
   useEffect(() => {
     if (Object.keys(errors).length === 0 && dataIsCorrect) {
@@ -39,22 +54,35 @@ const SignupForm = ({ submitForm }) => {
               <input
                 type="text"
                 className="input"
-                name="fullname"
-                value={values.fullname}
+                name="fullName"
+                value={values.fullName}
                 onChange={handleChange}
               />{" "}
-              {errors.fullname && <p className="error">{errors.fullname}</p>}
+              {errors.fullName && <p className="error">{errors.fullName}</p>}
             </div>
             <div className="email">
               <label className="label">Email ID</label>
               <input
                 type="text"
                 className="input"
-                name="email"
-                value={values.email}
+                name="emailId"
+                value={values.emailId}
                 onChange={handleChange}
               />
-              {errors.email && <p className="error">{errors.email}</p>}
+              {errors.emailId && <p className="error">{errors.emailId}</p>}
+            </div>
+            <div className="email">
+              <label className="label">Phone Number </label>
+              <input
+                type="number"
+                className="input"
+                name="phoneNumber"
+                value={values.phoneNumber}
+                onChange={handleChange}
+              />
+              {errors.phoneNumber && (
+                <p className="error">{errors.phoneNumber}</p>
+              )}
             </div>
             <div className="password">
               <label className="label">Password</label>
@@ -67,17 +95,7 @@ const SignupForm = ({ submitForm }) => {
               />
               {errors.password && <p className="error">{errors.password}</p>}
             </div>
-            <div className="password">
-              <label className="label">Confirm Password </label>
-              <input
-                type="password"
-                className="input"
-                name="confirm"
-                value={values.confirm}
-                onChange={handleChange}
-              />
-              {errors.confirm && <p className="error">{errors.confirm}</p>}
-            </div>
+
             <div>
               <button className="submit" onClick={handleFormSubmit}>
                 Sign Up
